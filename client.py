@@ -18,65 +18,9 @@ menu = """Welcome to the chat!
         For list of user who's connect type 'conn_list'.
         For sending message to certain connected user type 'privateMode'.
         For cancel the private mode type 'cancelPrivate'.
-        For downloading from the server type 'DOWNLOAD'.
         For reaching to this menu type 'MENU'.
         """
 print(menu)
-
-# def openUDP():
-#     print("U1")
-#     sock = socket(AF_INET, SOCK_DGRAM)
-#     print("U2")
-#     # sock.bind(SERVER_ADDRESS)
-#     print("U3")
-#     clientSocket.send(str(SERVER_ADDRESS).encode('ascii'))
-#     conti(sock)
-#
-#
-# def conti(sock):
-#     print(f"1the len is:{len(download)}")
-#     print("U4")
-#     counter = 0
-#     size = download[1]
-#     print("U5")
-#     all_data = [size]
-#     print("U6")
-#     while True:
-#         print(f"2the len is:{len(download)}")
-#         print(download[2])
-#         c_addr = download[2]
-#         data, c_addr = sock.recvfrom(2048)
-#         print("U7b")
-#         if data:
-#             print("U7c")
-#             print("File name:", data)
-#             file_name = data.strip()
-#         print("U8")
-#         f = open(file_name, 'w')
-#         print("U9")
-#         while True:
-#             print("U10")
-#             ready = select.select([sock], [], [], timeout)
-#             print("U11")
-#             if ready[0] and counter < len(size):
-#                 print("U12")
-#                 data, addr = sock.recvfrom(2048)
-#                 print("U13")
-#                 i = data.index('-')
-#                 print("U14")
-#                 serial_num = int(data[:i])
-#                 print("U15")
-#                 all_data[serial_num] = data[i+1:]
-#                 print("U16")
-#                 counter += 1
-#                 print("U17")
-#             else:
-#                 print("U18")
-#                 for i in len(all_data):
-#                     print("U19")
-#                     f.write(all_data[i])
-#                     print("U20")
-#                 break
 
 def udp():
     num = list[0]
@@ -146,20 +90,6 @@ def write():
             break
         elif inp == "conn_list":                    # to get the list of connected users
             clientSocket.send(inp.encode('ascii'))
-        elif inp == "DOWNLOAD":                     # download files from the server
-            private = False
-            download = True
-            clientSocket.send(inp.encode('ascii'))
-        elif inp == "CONTINUE_D":                   #continue downloading, function isn't working
-            clientSocket.send(inp.encode('ascii'))
-        elif inp == "CANCEL_D":                     #cancelthe download, function isn't working
-            download = False
-            clientSocket.send(inp.encode('ascii'))
-        elif download and inp.isnumeric():          #if the boolean download is True and the input is number
-            num = int(inp) - 1                      #the list of file begin in 1 not 0
-            private = False
-            list.append(num)
-            clientSocket.send(str(num).encode('ascii'))
         elif inp == "OK":
             clientSocket.send(inp.encode('ascii'))
         elif inp == "cancelPrivate":
